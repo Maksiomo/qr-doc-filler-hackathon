@@ -48,6 +48,7 @@ function addReserButton() {
     var form = document.getElementById('form_container');
     var newReset = document.createElement('input');
     newReset.setAttribute('type', 'reset');
+    newReset.setAttribute('id', 'resetButton');
     newReset.setAttribute('value', 'Очистить формы с данными');
     newReset.setAttribute("class", 'container button');
     form === null || form === void 0 ? void 0 : form.appendChild(newReset);
