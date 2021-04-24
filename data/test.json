@@ -1,0 +1,10 @@
+{
+  "sname": "Иванов",
+  "fname": "Иван",
+  "mname": "Иванович",
+  "passport_series": 2222,
+  "passport_number": 333111,
+  "day": 10,
+  "month": "июль",
+  "year": 21
+}
