@@ -4,8 +4,10 @@ var pdfPoolDiv = document.getElementById('pdf_pool_container');
 var checklDiv = document.getElementById('check_container');
 var fieldPoolDiv = document.getElementById('field_pool_container');
 var signatureDiv = document.getElementById('signature_container');
+var fields;
+var values;
 //Добавление формы
-function addFields(fields) {
+function addFields() {
     var newForm = document.createElement('form');
     newForm.setAttribute('name', 'input');
     newForm.setAttribute('method', 'post');
@@ -49,7 +51,7 @@ function addReserButton() {
     var newReset = document.createElement('input');
     newReset.setAttribute('type', 'reset');
     newReset.setAttribute('id', 'resetButton');
-    newReset.setAttribute('value', 'Очистить формы с данными');
+    newReset.setAttribute('value', 'Очистить формы');
     newReset.setAttribute("class", 'container button');
     form === null || form === void 0 ? void 0 : form.appendChild(newReset);
 }
@@ -88,8 +90,8 @@ function getTextById(id) {
 function addSignatureField() {
     var canvasDiv = document.createElement('canvas');
     canvasDiv.setAttribute("id", "signature");
-    canvasDiv.setAttribute("width", "1000");
-    canvasDiv.setAttribute("height", "200");
+    canvasDiv.setAttribute("width", "370");
+    canvasDiv.setAttribute("height", "260");
     canvasDiv.innerHTML = "This browser does not support Canvas.";
     var drawDiv = document.createElement('script');
     drawDiv.setAttribute("src", "dist/draw.js");
@@ -101,7 +103,7 @@ function addClearButton() {
     var newDiv = document.createElement('button');
     newDiv.setAttribute("id", "clearButton");
     newDiv.setAttribute("class", 'container button');
-    newDiv.innerHTML = "Очистить";
+    newDiv.innerHTML = "Очистить подпись";
     signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
     newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
         clear();
@@ -115,7 +117,15 @@ function addSignButton() {
     newDiv.innerHTML = "Подписать и отправить";
     signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
     newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
+        var _a, _b;
         var wasDraw = sign();
+        console.log((_a = document.querySelector('#name')) === null || _a === void 0 ? void 0 : _a.value);
+        for (var _i = 0, fields_2 = fields; _i < fields_2.length; _i++) {
+            var field = fields_2[_i];
+            values.push((_b = document.querySelector("#" + field)) === null || _b === void 0 ? void 0 : _b.value);
+        }
+        ;
+        console.log(values);
         if (wasDraw) {
             clearDiv(signatureDiv);
             clearDiv(fieldPoolDiv);
@@ -125,7 +135,8 @@ function addSignButton() {
 }
 //Добавление полей и кнопок начальной страницы
 function addfieldPoolDiv() {
-    addFields(['test', 'name', 'lastName']);
+    fields = ['test', 'name', 'lastName'];
+    addFields();
     addReserButton();
     addSignatureField();
     addClearButton();
