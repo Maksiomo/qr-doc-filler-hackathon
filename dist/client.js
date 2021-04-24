@@ -139,6 +139,7 @@ function addReturnButton() {
     checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
     newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
         clearDiv(checklDiv);
+        clearDiv(pdfPoolDiv);
         addfieldPoolDiv();
     });
 }
@@ -151,32 +152,31 @@ function addAllRigthButton() {
     checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
     newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
         clearDiv(checklDiv);
-        addSignedPDFPoolDiv();
+        clearDiv(pdfPoolDiv);
+        addMessage();
     });
 }
 //Проверка правильности заполнения полей
 function addCheckDiv() {
+    addPDF(["test.pdf"]);
     addReturnButton();
     addAllRigthButton();
 }
 //Вставка PDF-файла
-function addPDF(fileNames, signed) {
+function addPDF(fileNames) {
     for (var _i = 0, fileNames_1 = fileNames; _i < fileNames_1.length; _i++) {
         var fileName = fileNames_1[_i];
-        var newDiv_1 = document.createElement('iframe');
-        newDiv_1.setAttribute("src", fileName);
-        newDiv_1.setAttribute("width", "600");
-        newDiv_1.setAttribute("height", "600");
-        newDiv_1.setAttribute('class', 'iframe_container');
-        newDiv_1.innerHTML = "This browser does not support PDFs. Please download the PDF to view it: Download PDF";
+        var newDiv = document.createElement('iframe');
+        newDiv.setAttribute("src", fileName);
+        newDiv.setAttribute("width", "600");
+        newDiv.setAttribute("height", "600");
+        newDiv.setAttribute('class', 'iframe_container');
+        newDiv.innerHTML = "This browser does not support PDFs. Please download the PDF to view it: Download PDF";
         if (pdfPoolDiv) {
-            pdfPoolDiv.appendChild(newDiv_1);
+            pdfPoolDiv.appendChild(newDiv);
         }
         ;
     }
-    var newDiv = document.createElement('label');
-    newDiv.innerHTML = '<br>Данные отправлены<br>';
-    pdfPoolDiv === null || pdfPoolDiv === void 0 ? void 0 : pdfPoolDiv.appendChild(newDiv);
 }
 //Кнопка отправивления формы
 /*function addSendButton():void{
@@ -186,8 +186,10 @@ function addPDF(fileNames, signed) {
         addPDFPoolDiv();
     });
 }*/
-function addSignedPDFPoolDiv() {
-    addPDF(["test.pdf"], true);
+function addMessage() {
+    var newDiv = document.createElement('label');
+    newDiv.innerHTML = '<br>Данные отправлены<br>';
+    checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
 }
 function clearDiv(divName) {
     if (divName) {
