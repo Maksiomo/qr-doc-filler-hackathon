@@ -1,9 +1,60 @@
 "use strict";
+//Инициализация контейнеров
 var pdfPoolDiv = document.getElementById('pdf_pool_container');
+var checklDiv = document.getElementById('check_container');
 var fieldPoolDiv = document.getElementById('field_pool_container');
 var signatureDiv = document.getElementById('signature_container');
-function getTextByName(name) {
-    switch (name) {
+//Добавление формы
+function addFields(fields) {
+    var newForm = document.createElement('form');
+    newForm.setAttribute('name', 'input');
+    newForm.setAttribute('method', 'post');
+    newForm.setAttribute('action', '#');
+    newForm.setAttribute('id', 'form_container');
+    fieldPoolDiv === null || fieldPoolDiv === void 0 ? void 0 : fieldPoolDiv.appendChild(newForm);
+    if (newForm) {
+        for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
+            var field = fields_1[_i];
+            addField(field);
+        }
+        ;
+        /*const newSubmit: HTMLElement | null = document.createElement('input');
+        newSubmit.setAttribute('type', 'submit');
+        newSubmit.setAttribute('id', 'sendButton');
+        newSubmit.setAttribute('value', 'Отправить');
+        newForm.setAttribute("class", 'container button');
+        newForm.appendChild(newSubmit);*/
+    }
+}
+//Добавление поля и подписи к нему
+function addField(field) {
+    var form = document.getElementById('form_container');
+    var newDiv = document.createElement('label');
+    newDiv.setAttribute('class', 'field_label');
+    newDiv.innerHTML = getTextById(field) + "<br>";
+    form === null || form === void 0 ? void 0 : form.appendChild(newDiv);
+    var newInput = document.createElement('input');
+    newInput.setAttribute('id', field);
+    newInput.setAttribute('class', 'input_field');
+    newInput.setAttribute('type', 'text');
+    newInput.setAttribute('size', '40');
+    form === null || form === void 0 ? void 0 : form.appendChild(newInput);
+    newDiv = document.createElement('label');
+    newDiv.innerHTML = "<br>";
+    form === null || form === void 0 ? void 0 : form.appendChild(newDiv);
+}
+//Кнопка очистки полей с данными
+function addReserButton() {
+    var form = document.getElementById('form_container');
+    var newReset = document.createElement('input');
+    newReset.setAttribute('type', 'reset');
+    newReset.setAttribute('value', 'Очистить формы с данными');
+    newReset.setAttribute("class", 'container button');
+    form === null || form === void 0 ? void 0 : form.appendChild(newReset);
+}
+//Получение подписи к соответсвующему полю
+function getTextById(id) {
+    switch (id) {
         case 'name':
             {
                 return 'Имя';
@@ -32,137 +83,7 @@ function getTextByName(name) {
     }
     ;
 }
-function addField(field, newForm) {
-    var newDiv = document.createElement('span');
-    newDiv.innerHTML = getTextByName(field) + "<br>";
-    newForm.appendChild(newDiv);
-    var newInput = document.createElement('input');
-    newInput.setAttribute('name', field);
-    newInput.setAttribute('class', 'input_field');
-    newInput.setAttribute('type', 'text');
-    newInput.setAttribute('size', '40');
-    newForm.appendChild(newInput);
-    newDiv = document.createElement('span');
-    newDiv.innerHTML = "<br>";
-    newForm.appendChild(newDiv);
-}
-function addFields(fields) {
-    var newForm = document.createElement('form');
-    newForm.setAttribute('name', 'input');
-    newForm.setAttribute('method', 'post');
-    newForm.setAttribute('action', '#');
-    if (fieldPoolDiv) {
-        fieldPoolDiv.appendChild(newForm);
-    }
-    ;
-    if (newForm) {
-        for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
-            var field = fields_1[_i];
-            addField(field, newForm);
-        }
-        ;
-        var newSubmit = document.createElement('input');
-        newSubmit.setAttribute('type', 'submit');
-        newSubmit.setAttribute('id', 'sendButton');
-        newSubmit.setAttribute('value', 'Отправить');
-        newForm.appendChild(newSubmit);
-        var newReset = document.createElement('input');
-        newReset.setAttribute('type', 'reset');
-        newReset.setAttribute('value', 'Очистить');
-        newForm.appendChild(newReset);
-    }
-}
-function addPDF(fileNames, signed) {
-    for (var _i = 0, fileNames_1 = fileNames; _i < fileNames_1.length; _i++) {
-        var fileName = fileNames_1[_i];
-        var newDiv = document.createElement('iframe');
-        newDiv.setAttribute("src", fileName);
-        newDiv.setAttribute("width", "600");
-        newDiv.setAttribute("height", "600");
-        newDiv.innerHTML = "This browser does not support PDFs. Please download the PDF to view it: Download PDF";
-        if (pdfPoolDiv) {
-            pdfPoolDiv.appendChild(newDiv);
-        }
-        ;
-    }
-    if (pdfPoolDiv) {
-        var newDiv = document.createElement('span');
-        if (!signed) {
-            newDiv.innerHTML = '<br>Данные заполнены верно?<br>';
-        }
-        else {
-            newDiv.innerHTML = '<br>Подпись отправлена<br>';
-        }
-        ;
-        pdfPoolDiv.appendChild(newDiv);
-    }
-    ;
-}
-function addClearButton() {
-    var newDiv = document.createElement('button');
-    newDiv.setAttribute("id", "clearButton");
-    newDiv.setAttribute("class", 'container button');
-    newDiv.innerHTML = "Очистить";
-    if (signatureDiv) {
-        signatureDiv.appendChild(newDiv);
-    }
-    ;
-    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
-        clear();
-    });
-}
-function addSignButton() {
-    var newDiv = document.createElement('button');
-    newDiv.setAttribute("id", "signButton");
-    newDiv.setAttribute("class", 'container button');
-    newDiv.innerHTML = "Подписать";
-    if (signatureDiv) {
-        signatureDiv.appendChild(newDiv);
-    }
-    ;
-    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
-        var wasDraw = sign();
-        if (wasDraw) {
-            clearDiv(signatureDiv);
-            addSignedPDFPoolDiv();
-        }
-    });
-}
-function addSendButton() {
-    var sendButton = document.getElementById('sendButton');
-    sendButton === null || sendButton === void 0 ? void 0 : sendButton.addEventListener('click', function () {
-        clearDiv(fieldPoolDiv);
-        addPDFPoolDiv();
-    });
-}
-function addReturnButton() {
-    var newDiv = document.createElement('button');
-    newDiv.setAttribute("id", "returnButton");
-    newDiv.setAttribute("class", 'container button');
-    newDiv.innerHTML = "Нет, есть ошибки";
-    if (pdfPoolDiv) {
-        pdfPoolDiv.appendChild(newDiv);
-    }
-    ;
-    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
-        clearDiv(pdfPoolDiv);
-        addfieldPoolDiv();
-    });
-}
-function addAllRigthButton() {
-    var newDiv = document.createElement('button');
-    newDiv.setAttribute("id", "allRigthButton");
-    newDiv.setAttribute("class", 'container button');
-    newDiv.innerHTML = "Да, все верно";
-    if (pdfPoolDiv) {
-        pdfPoolDiv.appendChild(newDiv);
-    }
-    ;
-    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
-        clearDiv(pdfPoolDiv);
-        addSignatureField();
-    });
-}
+//Поле для подписи
 function addSignatureField() {
     var canvasDiv = document.createElement('canvas');
     canvasDiv.setAttribute("id", "signature");
@@ -171,23 +92,100 @@ function addSignatureField() {
     canvasDiv.innerHTML = "This browser does not support Canvas.";
     var drawDiv = document.createElement('script');
     drawDiv.setAttribute("src", "dist/draw.js");
-    if (signatureDiv) {
-        signatureDiv.appendChild(canvasDiv);
-        signatureDiv.appendChild(drawDiv);
-    }
-    ;
+    signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(canvasDiv);
+    signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(drawDiv);
+}
+//Кнопка очистки поля для подписи
+function addClearButton() {
+    var newDiv = document.createElement('button');
+    newDiv.setAttribute("id", "clearButton");
+    newDiv.setAttribute("class", 'container button');
+    newDiv.innerHTML = "Очистить";
+    signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
+    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
+        clear();
+    });
+}
+//Кнопка отправления подписи
+function addSignButton() {
+    var newDiv = document.createElement('button');
+    newDiv.setAttribute("id", "signButton");
+    newDiv.setAttribute("class", 'container button');
+    newDiv.innerHTML = "Подписать и отправить";
+    signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
+    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
+        var wasDraw = sign();
+        if (wasDraw) {
+            clearDiv(signatureDiv);
+            clearDiv(fieldPoolDiv);
+            addCheckDiv();
+        }
+    });
+}
+//Добавление полей и кнопок начальной страницы
+function addfieldPoolDiv() {
+    addFields(['test', 'name', 'lastName']);
+    addReserButton();
+    addSignatureField();
     addClearButton();
     addSignButton();
 }
-function addfieldPoolDiv() {
-    addFields(['test', 'name', 'lastName']);
-    addSendButton();
+//Кнопка вернуться к заполнению формы
+function addReturnButton() {
+    var newDiv = document.createElement('button');
+    newDiv.setAttribute("id", "returnButton");
+    newDiv.setAttribute("class", 'container button');
+    newDiv.innerHTML = "Нет, есть ошибки";
+    checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
+    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
+        clearDiv(checklDiv);
+        addfieldPoolDiv();
+    });
 }
-function addPDFPoolDiv() {
-    addPDF(["test.pdf"], false);
+//Кнопка подтверждения
+function addAllRigthButton() {
+    var newDiv = document.createElement('button');
+    newDiv.setAttribute("id", "allRigthButton");
+    newDiv.setAttribute("class", 'container button');
+    newDiv.innerHTML = "Да, все верно";
+    checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
+    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
+        clearDiv(checklDiv);
+        addSignedPDFPoolDiv();
+    });
+}
+//Проверка правильности заполнения полей
+function addCheckDiv() {
     addReturnButton();
     addAllRigthButton();
 }
+//Вставка PDF-файла
+function addPDF(fileNames, signed) {
+    for (var _i = 0, fileNames_1 = fileNames; _i < fileNames_1.length; _i++) {
+        var fileName = fileNames_1[_i];
+        var newDiv_1 = document.createElement('iframe');
+        newDiv_1.setAttribute("src", fileName);
+        newDiv_1.setAttribute("width", "600");
+        newDiv_1.setAttribute("height", "600");
+        newDiv_1.setAttribute('class', 'iframe_container');
+        newDiv_1.innerHTML = "This browser does not support PDFs. Please download the PDF to view it: Download PDF";
+        if (pdfPoolDiv) {
+            pdfPoolDiv.appendChild(newDiv_1);
+        }
+        ;
+    }
+    var newDiv = document.createElement('label');
+    newDiv.innerHTML = '<br>Данные отправлены<br>';
+    pdfPoolDiv === null || pdfPoolDiv === void 0 ? void 0 : pdfPoolDiv.appendChild(newDiv);
+}
+//Кнопка отправивления формы
+/*function addSendButton():void{
+    const sendButton: HTMLElement | null = document.getElementById('sendButton');
+    sendButton?.addEventListener('click', () =>{
+        clearDiv(fieldPoolDiv);
+        addPDFPoolDiv();
+    });
+}*/
 function addSignedPDFPoolDiv() {
     addPDF(["test.pdf"], true);
 }
