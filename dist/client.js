@@ -15,7 +15,8 @@ function addFields() {
     newForm.setAttribute('id', 'form_container');
     fieldPoolDiv === null || fieldPoolDiv === void 0 ? void 0 : fieldPoolDiv.appendChild(newForm);
     if (newForm) {
-        for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
+        //Цикл с единицы начинается чтобы тестовое поле пропустить
+        for (var _i = 1, fields_1 = fields; _i < fields_1.length; _i++) {
             var field = fields_1[_i];
             addField(field);
         }
