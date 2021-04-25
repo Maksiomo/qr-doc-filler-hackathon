@@ -14,17 +14,18 @@ if __name__ == "__main__":
     with open('../../config/signature.json', 'r', encoding='utf-8') as json_file:
         formData = json.load(json_file)
 
-
     code = data.get("signature")
     uuid = data.get("uuid")
     email = data.get("email")
     formList = data.get("docTypes")
     files = []
 
-    saveLog(logs_folder, uuid, data)
+    saveLog(logs_folder, uuid, data)  # Сохраняю лог
+    decodeDataUrl(info_folder, code, uuid)  # Декодирую подпись
 
     for form in formList:
         fillAndConvert(info_folder, form, data, uuid, formData)
         files.append(info_folder + form + "-user-" + uuid + ".pdf")
 
-    send_email(email, "Тестовая тема", "Тестовое описание", files)
+    # Отправляю письмо (адрес, тема письма, текст письма, приложенные файлы)
+    send_email(email, "Копии документов", "", files)

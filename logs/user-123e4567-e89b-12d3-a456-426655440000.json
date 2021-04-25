@@ -1,5 +1,5 @@
 {
-    "time": "2021-04-25 14:42:12.372118",
+    "time": "2021-04-25 16:09:50.694353",
     "uuid": "123e4567-e89b-12d3-a456-426655440000",
     "docTypes": [
         "aquaruimService",
@@ -7,9 +7,10 @@
     ],
     "contract_number": 11002312312,
     "tin": 213213123,
-    "sname": "Иванов",
-    "fname": "Иван",
-    "mname": "Иванович",
+    "sname": "Морозов",
+    "fname": "Даниил",
+    "mname": "Вадимович",
+    "city": "Самара",
     "passport_series": 2222,
     "passport_number": 333111,
     "requisites": 32020212,
