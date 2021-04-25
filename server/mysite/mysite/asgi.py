@@ -34,7 +34,7 @@ application = ProtocolTypeRouter({
 
     "websocket": AuthMiddlewareStack(
         URLRouter([
-            url(r"^index/$", DocumentsConsumer.as_asgi()),
+            url(r"^mainpage/$", DocumentsConsumer.as_asgi()),
         ])
     ),
 })
