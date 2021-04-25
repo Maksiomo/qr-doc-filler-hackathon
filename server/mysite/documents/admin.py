@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import PassengerInfo
-admin.site.register(PassengerInfo)
+from .models import AquariumInfo
+admin.site.register(AquariumInfo)
 # Register your models here.

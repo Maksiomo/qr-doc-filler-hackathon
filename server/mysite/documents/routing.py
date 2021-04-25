@@ -16,5 +16,5 @@ from . import consumers
 
 
 websocket_urlpatterns = [
-    re_path(r'mainpage/$', consumers.WebsocketConsumer),
+    re_path(r'documents/$', consumers.WebsocketConsumer),
 ]

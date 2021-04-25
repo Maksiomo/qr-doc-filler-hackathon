@@ -15,8 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import sys
+sys.path.append('../..')
+from documents import views
+
+#urlpatterns = [
+ #   path('documents/', include('documents.urls')),
+  #  path('admin/', admin.site.urls),
+#]
+
 
 urlpatterns = [
-    path('documents/', include('documents.urls')),
-    path('admin/', admin.site.urls),
+   path('documents/', views.mainpage, name = 'mainpage'),
+   path('home/', views.index, name='home'),
+   path('<int:contract_number>/', views.index, name='mainpage'),
+   path('admin/', admin.site.urls),
 ]
