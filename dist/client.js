@@ -8,6 +8,10 @@ var fields;
 var values = {
     name: "",
     lastName: "",
+    otch: "",
+    city: "",
+    count: "",
+    email: "",
     image: "",
     id: uuidv4()
 };
@@ -80,7 +84,7 @@ function addReserButton() {
 //Получение подписи к соответсвующему полю
 function getTextById(id) {
     switch (id) {
-        case 'name':
+        case 'Name':
             {
                 return 'Имя';
             }
@@ -95,9 +99,24 @@ function getTextById(id) {
                 return 'Отчетсво';
             }
             ;
+        case "city":
+            {
+                return 'Город';
+            }
+            ;
         case "test":
             {
                 return 'Тест';
+            }
+            ;
+        case "count":
+            {
+                return 'Количество аквариумов';
+            }
+            ;
+        case 'email':
+            {
+                return 'Электронная почта';
             }
             ;
         default:
@@ -139,8 +158,12 @@ function addSignButton() {
     newDiv.innerHTML = "Отправить";
     signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
     newDiv.addEventListener('click', function () {
-        values.name = document.querySelector("#name").value;
+        values.name = document.querySelector("#Name").value;
         values.lastName = document.querySelector("#lastName").value;
+        values.otch = document.querySelector("#otch").value;
+        values.count = document.querySelector("#count").value;
+        values.city = document.querySelector("#city").value;
+        values.email = document.querySelector("#email").value;
         var wasDraw = sign(); 
         if (wasDraw) {
             console.log(image);
@@ -155,7 +178,7 @@ function addSignButton() {
 }
 //Добавление полей и кнопок начальной страницы
 function addfieldPoolDiv() {
-    fields = ['test', 'name', 'lastName'];
+    fields = ['test', 'lastName', 'Name', 'otch', 'city', 'count', 'email'];
     addFields();
     addReserButton();
     addSignatureField();
@@ -221,7 +244,7 @@ function addPDF(fileNames) {
 function addMessage() {
     var newDiv = document.createElement('label');
     newDiv.setAttribute('id', 'message');
-    newDiv.innerHTML = '<br>Данные отправлены<br>';
+    newDiv.innerHTML = '<br>Копии документов отправлены на электронную почту<br>';
     checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
 }
 function clearDiv(divName) {
