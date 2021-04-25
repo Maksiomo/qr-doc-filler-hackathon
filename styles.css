@@ -30,6 +30,10 @@ input{
     width: 314px;
 }
 .button{
+    border: 1px solid transparent;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 5px;
     width: 125px;
     height: 21px;
     margin-bottom: 10px;
@@ -56,6 +60,6 @@ input{
     margin-left:42px;
 }
 #noSignetureMessage{
-    position:absolute;
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
