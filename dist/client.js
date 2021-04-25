@@ -92,7 +92,7 @@ function addSignatureField() {
     var canvasDiv = document.createElement('canvas');
     canvasDiv.setAttribute("id", "signature");
     canvasDiv.setAttribute("width", "291");
-    canvasDiv.setAttribute("height", "260");
+    canvasDiv.setAttribute("height", "86");
     canvasDiv.innerHTML = "This browser does not support Canvas.";
     var drawDiv = document.createElement('script');
     drawDiv.setAttribute("src", "dist/draw.js");
