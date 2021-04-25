@@ -6,10 +6,16 @@ var fieldPoolDiv = document.getElementById('field_pool_container');
 var signatureDiv = document.getElementById('signature_container');
 var fields;
 var values = {
-    test: "",
     name: "",
     lastName: ""
 };
+
+var connection = new WebSocket("ws://localhost:3030");
+
+connection.onmessage = function(message) {
+
+}
+
 //Добавление формы
 function addFields() {
     var newForm = document.createElement('form');
@@ -125,7 +131,6 @@ function addSignButton() {
         var _a, _b;
         var wasDraw = sign(); 
         console.log((_a = document.querySelector('#name')) === null || _a === void 0 ? void 0 : _a.value);
-        values.test = document.querySelector("#test").value;
         values.name = document.querySelector("#name").value;
         values.lastName = document.querySelector("#lastName").value;
         console.log(values);
@@ -134,6 +139,7 @@ function addSignButton() {
             clearDiv(fieldPoolDiv);
             addCheckDiv();
         }
+        connection.send(values, )
     });
 }
 //Добавление полей и кнопок начальной страницы
