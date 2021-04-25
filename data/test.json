@@ -1,5 +1,6 @@
 {
   "uuid": "123e4567-e89b-12d3-a456-426655440000",
+  "formType": "aquarium_form",
   "contract_number": 11002312312,
   "tin": 213213123,
   "sname": "Иванов",
@@ -10,7 +11,7 @@
   "requisites": 32020212,
   "tank_count": 1,
   "tank_type": "40л",
-  "email": "fukuroOwl@yandex.ru",
+  "email": "Semion.Kap2@gmail.com",
   "old_org_name": "Old company",
   "new_org_name": "New company",
   "doc_type": "Паспорт",
