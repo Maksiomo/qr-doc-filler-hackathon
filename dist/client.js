@@ -13,7 +13,12 @@ var values = {
     count: "",
     email: "",
     image: "",
-    id: uuidv4()
+    id: uuidv4(),
+    logs: {
+        browserCodeName: navigator.appCodeName,
+        browserVersion: navigator.appVersion
+    },
+    docTypes: ["aquaruimService", "form"]
 };
 
 var connection = new WebSocket("ws://localhost:3030");
