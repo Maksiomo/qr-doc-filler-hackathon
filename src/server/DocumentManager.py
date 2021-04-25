@@ -1,4 +1,4 @@
-import json, base64
+import os, base64
 from docx2pdf import convert
 from docxtpl import DocxTemplate
 from docx.shared import Inches
@@ -20,6 +20,7 @@ def fillAndConvert(info_folder, form_file_name, data, uuid, formData):
 
     doc.save(info_folder + form_file_name + "-user-" + uuid + ".docx")
     convert(info_folder + form_file_name + "-user-" + uuid + ".docx", info_folder + form_file_name + "-user-" + uuid + ".pdf")
+    os.remove(info_folder + form_file_name + "-user-" + uuid + ".docx")
 
 
 def decodeDataUrl(info_folder, code, uuid):
