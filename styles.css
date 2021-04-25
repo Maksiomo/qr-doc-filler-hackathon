@@ -26,6 +26,10 @@ input{
     margin-bottom: 10px;
     margin-left: 10px;
 }
+#signature{
+    height: 125px;
+    width: 290px;
+}
 #signature_container{
     width: 314px;
 }
