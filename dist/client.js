@@ -5,7 +5,11 @@ var checklDiv = document.getElementById('check_container');
 var fieldPoolDiv = document.getElementById('field_pool_container');
 var signatureDiv = document.getElementById('signature_container');
 var fields;
-var values;
+var values = {
+    test: "",
+    name: "",
+    lastName: ""
+};
 //Добавление формы
 function addFields() {
     var newForm = document.createElement('form');
@@ -116,15 +120,13 @@ function addSignButton() {
     newDiv.setAttribute("class", 'container button');
     newDiv.innerHTML = "Отправить";
     signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
-    newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
+    newDiv.addEventListener('click', function () {
         var _a, _b;
-        var wasDraw = sign();
+        var wasDraw = sign(); 
         console.log((_a = document.querySelector('#name')) === null || _a === void 0 ? void 0 : _a.value);
-        for (var _i = 0, fields_2 = fields; _i < fields_2.length; _i++) {
-            var field = fields_2[_i];
-            values.push((_b = document.querySelector("#" + field)) === null || _b === void 0 ? void 0 : _b.value);
-        }
-        ;
+        values.test = document.querySelector("#test").value;
+        values.name = document.querySelector("#name").value;
+        values.lastName = document.querySelector("#lastName").value;
         console.log(values);
         if (wasDraw) {
             clearDiv(signatureDiv);
