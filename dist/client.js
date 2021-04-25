@@ -8,7 +8,8 @@ var fields;
 var values = {
     name: "",
     lastName: "",
-    image: ""
+    image: "",
+    id: uuidv4()
 };
 
 var connection = new WebSocket("ws://localhost:3030");
@@ -16,6 +17,15 @@ var connection = new WebSocket("ws://localhost:3030");
 connection.onmessage = function(message) {
 
 }
+
+// генерация id пользователя
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
 
 //Добавление формы
 function addFields() {
