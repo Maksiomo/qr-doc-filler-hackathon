@@ -10,11 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
+from os import path
+
+# PROJECT_PATH = path.realpath(path.dirname(__file__))
+# MEDIA_ROOT = path.join(PROJECT_PATH, 'media')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -31,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'documents.apps.DocumentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'daphne',   
 ]
 
 MIDDLEWARE = [
@@ -78,7 +86,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        #'NAME': BASE_DIR + '/' + 'db.sqlite3',
     }
+}
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgiref.inmemory.ChannelLayer',
+        'ROUTING': 'mysite.asgi',
+        'CONFIG': {
+            'hosts': [('localhost', 3030)],
+        },
+    },
 }
 
 
@@ -119,3 +139,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_URL = BASE_DIR + '/' + 'static/'
+
+#STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'static').replace('\\', '/'),)
+
+ASGI_APPLICATION = 'mysite.asgi.application'

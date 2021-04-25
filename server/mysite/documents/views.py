@@ -1,13 +1,13 @@
 from django.shortcuts import render
+#from django.template import loader
 from django.http import HttpResponse
+from .models import PassengerInfo
+from .forms import PassengerInfo
+
+def home(request):
+    return render(request, 'documents/index.html', {})
 
 def index(request):
-    if(request == None):
-        return HttpResponse("Invalid request")
-    else:
-        #name = request.name
-        #lastName = request.lastName
-        #otch = request.otch
-        return HttpResponse("Server recieved info")
-
-# Create your views here.
+    return render(request, 'documents/index.html', {
+        'contract_number': contract_number
+    })

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{{ STATIC_URL }}/client.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <style>
+        #signature{
+        touch-action: none;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id = "pdf_pool_container" class = "container">
+        
+    </div>
+
+    <div id = "field_pool_container" class = "container">
+        
+    </div>
+    <div id = "signature_container" class = "container">
+        
+    </div>
+
+    {{ test | json_script: "contract_number", json_script: "tin", json_script: "sname", json_script: "fname",
+json_script: "mname", json_script: "passport_series", json_script: "passport_number", json_script: "requisities",
+json_script: "contact", json_script: "old_org_name", json_script: "new_org_name", json_script: "doc_type",
+json_script: "doc_s", json_script: "doc_n", json_script: "doc_date", json_script: "doc_author", json_script: doc_reg_location,
+json_script: "day", json_script: "month", json_script: "year", json_script: "signature"}}
+    <script>const contract_number = JSON.parse(document.getElementById('contract_number').textContent);
+        const tin = JSON.parse(document.getElementById('tin').intContent);
+        const sname = JSON.parse(document.getElementById('sname').textContent);
+        const fname = JSON.parse(document.getElementById('fname').textContent);
+        const mname = JSON.parse(document.getElementById('mname').textContent);
+        const passport_series = JSON.parse(document.getElementById('passport_series').intContent);
+        const passport_number = JSON.parse(document.getElementById('passport_number').intContent);
+        const requisities = JSON.parse(document.getElementById('requisities').intContent);
+        const contact = JSON.parse(document.getElementById('contact').textContent);
+        const old_org_name = JSON.parse(document.getElementById('old_org_name').textContent);
+        const new_org_name = JSON.parse(document.getElementById('new_org_name').textContent);
+        const doc_type = JSON.parse(document.getElementById('doc_type').textContent);
+        const doc_s = JSON.parse(document.getElementById('doc_s').intContent);
+        const doc_n = JSON.parse(document.getElementById('doc_n').intContent);
+        const doc_date = JSON.parse(document.getElementById('doc_date').textContent);
+        const doc_author = JSON.parse(document.getElementById('doc_author').textContent);
+        const doc_reg_location = JSON.parse(document.getElementById('doc_reg_location').textContent);
+        const day = JSON.parse(document.getElementById('day').intContent);
+        const month = JSON.parse(document.getElementById('month').textContent);
+        const year = JSON.parse(document.getElementById('year').intContent);
+        const signature = JSON.parse(document.getElementById('signature').textContent);
+
+        //возможно тут вместо windows.location.host нужен 3030
+        //а вместо contract_number прикрутить уникальный номер
+        const documentsSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/index/'
+            + contract_number
+            + '/'
+        );
+
+        documentsSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+        }
+
+        documentsSocket.onclose = function(e) {
+            console.error('Oops lost it');
+        }
+    </script>
+    
+</body>
+</html>
