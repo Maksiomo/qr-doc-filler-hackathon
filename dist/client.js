@@ -200,8 +200,8 @@ function addPDF(fileNames) {
         var fileName = fileNames_1[_i];
         var newDiv = document.createElement('iframe');
         newDiv.setAttribute("src", fileName);
-        newDiv.setAttribute("width", "600");
-        newDiv.setAttribute("height", "600");
+        newDiv.setAttribute("width", "400");
+        newDiv.setAttribute("height", "500");
         newDiv.setAttribute('class', 'iframe_container');
         newDiv.innerHTML = "This browser does not support PDFs. Please download the PDF to view it: Download PDF";
         if (pdfPoolDiv) {
@@ -220,6 +220,7 @@ function addPDF(fileNames) {
 }*/
 function addMessage() {
     var newDiv = document.createElement('label');
+    newDiv.setAttribute('id', 'message');
     newDiv.innerHTML = '<br>Данные отправлены<br>';
     checklDiv === null || checklDiv === void 0 ? void 0 : checklDiv.appendChild(newDiv);
 }
