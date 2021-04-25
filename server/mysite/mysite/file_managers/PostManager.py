@@ -8,18 +8,16 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-info_folder = "../../data/"
-config_folder = "../../config/"
-file_name = "post.json"
+
 
 
 # Функция для отправки письма
-def send_email(addr_to, msg_subj, msg_text, files):
+def send_email(addr_to, msg_subj, msg_text, files, config_folder):
     # Получение логина, пароля, SMTP_SSL и порта для подключения к почте
-    data = getEmailInfo(config_folder, file_name)
+    data = getEmailInfo(config_folder, "post.json")
 
     if data == -1:
-        print("Произошла ошибка при считывании " + file_name + ". Проверьте корректность введённых данных.")
+        print("Произошла ошибка при считывании post.json. Проверьте корректность введённых данных.")
         return -1
 
     login = data[0]
