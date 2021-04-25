@@ -24,4 +24,4 @@ if __name__ == "__main__":
         fillAndConvert(info_folder, form, data, uuid, formData)
         files.append(info_folder + form + "-user-" + uuid + ".pdf")
 
-    send_email(email, "Тестовая тема", "Тест1231", files)
+    send_email(email, "Копия документа на обслуживание аквариума", "", files)
