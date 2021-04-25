@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  rel="stylesheet" href="./styles.css">
     <title>Document</title>
-    <script src="{{ STATIC_URL }}/client.js" defer></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script src="dist/client.js" defer></script>
     <style>
         #signature{
         touch-action: none;
@@ -17,23 +17,23 @@
     </style>
 </head>
 <body>
-
+    <div id="menu"><br>
     <div id = "pdf_pool_container" class = "container">
         
     </div>
-
     <div id = "field_pool_container" class = "container">
         
     </div>
     <div id = "signature_container" class = "container">
         
     </div>
+    <div id = "check_container" class = "container">
+        
+    </div>
+    <br>
+    </div>
+    <br></div>
 
-    {{ test | json_script: "contract_number", json_script: "tin", json_script: "sname", json_script: "fname",
-json_script: "mname", json_script: "passport_series", json_script: "passport_number", json_script: "requisities",
-json_script: "contact", json_script: "old_org_name", json_script: "new_org_name", json_script: "doc_type",
-json_script: "doc_s", json_script: "doc_n", json_script: "doc_date", json_script: "doc_author", json_script: doc_reg_location,
-json_script: "day", json_script: "month", json_script: "year", json_script: "signature"}}
     <script>const contract_number = JSON.parse(document.getElementById('contract_number').textContent);
         const tin = JSON.parse(document.getElementById('tin').intContent);
         const sname = JSON.parse(document.getElementById('sname').textContent);
