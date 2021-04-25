@@ -3,11 +3,7 @@ from docx2pdf import convert
 from docxtpl import DocxTemplate
 from docx.shared import Inches
 
-info_folder = "../../data/"
-file_name = "form-final"
-
-
-def fillAndConvert(data):
+def fillAndConvert(info_folder, file_name, data):
     doc = DocxTemplate(info_folder + "form.docx")
     tables = doc.tables
     print(tables)
@@ -24,13 +20,3 @@ def fillAndConvert(data):
 def decodeDataUrl(info_folder, code):
     with open(info_folder + 'signature.png', 'wb') as f:
         f.write(base64.b64decode(code.split(',')[1].encode()))
-
-
-if __name__ == "__main__":
-    with open('../../data/test.json', 'r', encoding='utf-8') as json_file:
-        data = json.load(json_file)
-
-    code = data.get("signature")
-    decodeDataUrl(info_folder, code)
-
-    fillAndConvert(data)
