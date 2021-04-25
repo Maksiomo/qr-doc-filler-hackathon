@@ -1,4 +1,5 @@
 {
+  "uuid": "123e4567-e89b-12d3-a456-426655440000",
   "contract_number": 11002312312,
   "tin": 213213123,
   "sname": "Иванов",
@@ -7,7 +8,9 @@
   "passport_series": 2222,
   "passport_number": 333111,
   "requisites": 32020212,
-  "contact": "test_mail@gmail.com",
+  "tank_count": 1,
+  "tank_type": "40л",
+  "email": "Semion.Kap2@gmail.com",
   "old_org_name": "Old company",
   "new_org_name": "New company",
   "doc_type": "Паспорт",

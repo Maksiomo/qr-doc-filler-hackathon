@@ -14,7 +14,7 @@ from email.mime.multipart import MIMEMultipart              # Многокомп
 info_folder = "../../data/"
 file_name = "post.json"
 
-def send_email(addr_to, msg_subj, msg_text, file):
+def send_email(addr_to, msg_subj, msg_text, files):
 
     data = getEmailInfo(info_folder, file_name)
 
@@ -35,7 +35,8 @@ def send_email(addr_to, msg_subj, msg_text, file):
     body = msg_text
     msg.attach(MIMEText(body, 'plain'))
 
-    attach_file(msg, file)
+    for file in files:
+        attach_file(msg, file)
 
     server = smtplib.SMTP_SSL(SMTP_SSL, port)
     #server.starttls()
