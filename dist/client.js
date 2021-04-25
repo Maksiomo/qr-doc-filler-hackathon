@@ -90,7 +90,7 @@ function getTextById(id) {
 function addSignatureField() {
     var canvasDiv = document.createElement('canvas');
     canvasDiv.setAttribute("id", "signature");
-    canvasDiv.setAttribute("width", "370");
+    canvasDiv.setAttribute("width", "291");
     canvasDiv.setAttribute("height", "260");
     canvasDiv.innerHTML = "This browser does not support Canvas.";
     var drawDiv = document.createElement('script');
@@ -114,7 +114,7 @@ function addSignButton() {
     var newDiv = document.createElement('button');
     newDiv.setAttribute("id", "signButton");
     newDiv.setAttribute("class", 'container button');
-    newDiv.innerHTML = "Подписать и отправить";
+    newDiv.innerHTML = "Отправить";
     signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
     newDiv === null || newDiv === void 0 ? void 0 : newDiv.addEventListener('click', function () {
         var _a, _b;
