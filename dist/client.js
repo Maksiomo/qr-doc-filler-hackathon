@@ -7,7 +7,8 @@ var signatureDiv = document.getElementById('signature_container');
 var fields;
 var values = {
     name: "",
-    lastName: ""
+    lastName: "",
+    image: ""
 };
 
 var connection = new WebSocket("ws://localhost:3030");
@@ -128,18 +129,18 @@ function addSignButton() {
     newDiv.innerHTML = "Отправить";
     signatureDiv === null || signatureDiv === void 0 ? void 0 : signatureDiv.appendChild(newDiv);
     newDiv.addEventListener('click', function () {
-        var _a, _b;
-        var wasDraw = sign(); 
-        console.log((_a = document.querySelector('#name')) === null || _a === void 0 ? void 0 : _a.value);
         values.name = document.querySelector("#name").value;
         values.lastName = document.querySelector("#lastName").value;
-        console.log(values);
+        var wasDraw = sign(); 
         if (wasDraw) {
+            console.log(image);
+            values.image = image;
             clearDiv(signatureDiv);
             clearDiv(fieldPoolDiv);
             addCheckDiv();
         }
-        connection.send(values, )
+        console.log(values);
+        connection.send(values);
     });
 }
 //Добавление полей и кнопок начальной страницы
@@ -222,4 +223,3 @@ function clearDiv(divName) {
     ;
 }
 addfieldPoolDiv();
-//# sourceMappingURL=client.js.map

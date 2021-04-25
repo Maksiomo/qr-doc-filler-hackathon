@@ -1,5 +1,6 @@
 var canvas = document.getElementById("signature"); 
 var ctx = canvas.getContext("2d");
+var image;
 ctx.strokeStyle = "#222222";
 ctx.lineWith = 2;
                  
@@ -121,8 +122,7 @@ function clear() {
 
 function sign(){
     if(wasDraw){
-        var image = canvas.toDataURL();
-        console.log(image);
+        image = canvas.toDataURL();
     }
     else{
         if(!document.getElementById('noSignetureMessage')){
